@@ -61,6 +61,9 @@ new Vue({
             <button @click="toggle">toggle</button>
             <hr/>
             <comp-demo2 v-if="visiable === true"></comp-demo2>
+           	<hr/>
+            <p>外部n：{{n}}</p>
+            <comp-demo1 :message="n" :fn="add"></comp-demo1>
         </div>
 
     `,
