@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,16 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+<!--      n 和 button 需要完整版的编译器处理才能正确使用和实现功能-->
+      {{n}}
+      <button @click="add">+1</button>
+    </div>
     <!-- built files will be auto injected -->
+    <!-- 完整版的cdn   -->
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>-->
+  <!-- 非完整版的cdn,min版缺少提示信息  -->
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.runtime.min.js"></script>-->
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.runtime.js"></script>-->
   </body>
 </html>
