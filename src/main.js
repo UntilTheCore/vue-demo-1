@@ -15,11 +15,39 @@ import CompDemo1 from './components/compDemo1'
 //  1.1 - 使用单文件组件
 //  1.2 - 创建和使用全局组件
 Vue.component('CompDemo2', {
+    data(){
+        return {
+            n : 0
+        }
+    },
     template: `
         <div>
-        我是组件2
-</div>
-    `
+            <p>我是组件2</p>
+            {{n}}
+            <button @click="add">+1</button>
+        </div>
+    `,
+    methods: {
+        add(){this.n += 1}
+    },
+    // created 调用时，template内的内容还未被渲染
+    created(){
+        console.log('我是组件2,当前在内存中，还没有显示到页面上！')
+    },
+    // mounted 调用时，页面已渲染完毕
+    mounted() {
+        console.log('我是组件2，当前页面已经渲染出来了！')
+    },
+    // 页面发生更新就会调用updated()方法。
+    updated() {
+        console.log('我是组件2,页面更新了！')
+    },
+    // 在组件被隐藏时即调用destroyed()方法。
+    // 组件发生destroyed是这个组件被干掉了，不会保留，再被显示出来也是创建了一个新的
+    // 通过观察 n 就可以发现这一点，n增加后干掉组件不会被保留。
+    destroyed() {
+        console.log('组件2消亡了！')
+    }
 })
 new Vue({
     components: {
@@ -28,20 +56,26 @@ new Vue({
     el: '#app',
     template: `
         <div>
-            <CompDemo1/>
-            <comp-demo2/>
+<!--            <comp-demo2/>-->
+<!--            <CompDemo1/>-->
+            <button @click="toggle">toggle</button>
+            <hr/>
+            <comp-demo2 v-if="visiable === true"></comp-demo2>
         </div>
 
     `,
     data: {
         n: 1,
+        visiable:true
     },
     methods: {
         add() {
             this.n += 1
+        },
+        toggle(){
+            this.visiable = !this.visiable
         }
-
-    }
+    },
 })
 
 // 2、非完整版的Vue需要通过 h 去渲染
