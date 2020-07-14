@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 
 import CompDemo1 from './components/compDemo1'
 import ComputedDemo from './components/computedDemo'
+import WatchDemo from "./components/watchDemo";
 // 1、完整版的Vue操作html
 //  1.1 - 使用单文件组件
 //  1.2 - 创建和使用全局组件
@@ -56,6 +57,7 @@ new Vue({
     components: {
         CompDemo1,
         ComputedDemo,
+        WatchDemo,
     },
     el: '#app',
     template: `
@@ -64,25 +66,28 @@ new Vue({
             <!--            <CompDemo1/>-->
             <button @click="toggle">toggle</button>
             <hr/>
-            <comp-demo2 v-if="visiable === true"></comp-demo2>
+            <comp-demo2 v-if="visible === true"></comp-demo2>
             <hr/>
             <p>外部n：{{n}}</p>
             <comp-demo1 :message="n" :fn="add"></comp-demo1>
+            <hr/>
             <!--            使用ComputedDemo组件-->
             <ComputedDemo></ComputedDemo>
+            <hr/>
+            <watch-demo></watch-demo>
         </div>
 
     `,
     data: {
         n: 1,
-        visiable: true
+        visible: true
     },
     methods: {
         add() {
             this.n += 1
         },
         toggle() {
-            this.visiable = !this.visiable
+            this.visible = !this.visible
         }
     },
 })
