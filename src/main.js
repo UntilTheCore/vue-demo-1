@@ -11,13 +11,14 @@ Vue.config.productionTip = false
 // console.log(window.Vue)
 
 import CompDemo1 from './components/compDemo1'
+import ComputedDemo from './components/computedDemo'
 // 1、完整版的Vue操作html
 //  1.1 - 使用单文件组件
 //  1.2 - 创建和使用全局组件
 Vue.component('CompDemo2', {
-    data(){
+    data() {
         return {
-            n : 0
+            n: 0
         }
     },
     template: `
@@ -28,10 +29,12 @@ Vue.component('CompDemo2', {
         </div>
     `,
     methods: {
-        add(){this.n += 1}
+        add() {
+            this.n += 1
+        }
     },
     // created 调用时，template内的内容还未被渲染
-    created(){
+    created() {
         console.log('我是组件2,当前在内存中，还没有显示到页面上！')
     },
     // mounted 调用时，页面已渲染完毕
@@ -52,30 +55,33 @@ Vue.component('CompDemo2', {
 new Vue({
     components: {
         CompDemo1,
+        ComputedDemo,
     },
     el: '#app',
     template: `
         <div>
-<!--            <comp-demo2/>-->
-<!--            <CompDemo1/>-->
+            <!--            <comp-demo2/>-->
+            <!--            <CompDemo1/>-->
             <button @click="toggle">toggle</button>
             <hr/>
             <comp-demo2 v-if="visiable === true"></comp-demo2>
-           	<hr/>
+            <hr/>
             <p>外部n：{{n}}</p>
             <comp-demo1 :message="n" :fn="add"></comp-demo1>
+            <!--            使用ComputedDemo组件-->
+            <ComputedDemo></ComputedDemo>
         </div>
 
     `,
     data: {
         n: 1,
-        visiable:true
+        visiable: true
     },
     methods: {
         add() {
             this.n += 1
         },
-        toggle(){
+        toggle() {
             this.visiable = !this.visiable
         }
     },
