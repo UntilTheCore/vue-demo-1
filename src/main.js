@@ -12,7 +12,15 @@ Vue.config.productionTip = false
 
 import CompDemo1 from './components/compDemo1'
 import ComputedDemo from './components/computedDemo'
-import WatchDemo from "./components/watchDemo";
+import WatchDemo from "./components/watchDemo"
+import DirectiveDemo from './components/directiveDemo'
+// 注册全局指令
+Vue.directive('x', {
+    inserted(el) {
+        console.log('我是指令x')
+        console.log(el);
+    }
+})
 // 1、完整版的Vue操作html
 //  1.1 - 使用单文件组件
 //  1.2 - 创建和使用全局组件
@@ -58,6 +66,7 @@ new Vue({
         CompDemo1,
         ComputedDemo,
         WatchDemo,
+        DirectiveDemo,
     },
     el: '#app',
     template: `
@@ -74,10 +83,12 @@ new Vue({
             <!--            使用ComputedDemo组件-->
             <ComputedDemo></ComputedDemo>
             <hr/>
-            <watch-demo></watch-demo>
+            <!--            // 使用自定义指令 x-->
+            <watch-demo v-x></watch-demo>
+            <hr/>
+            <directive-demo></directive-demo>
         </div>
-
-    `,
+        `,
     data: {
         n: 1,
         visible: true
